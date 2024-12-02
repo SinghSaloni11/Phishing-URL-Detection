@@ -1,0 +1,106 @@
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-size: 62.5%;
+}
+
+body {
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  
+  justify-content: center;
+  align-items: center; 
+  height: 100vh;
+  color: #fff;
+  padding: 10% 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.left {
+  width: 45%;
+}
+
+.right {
+  width: 45%;
+  text-align: right;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+input {
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: #f8eedb;
+  border: none;
+  color: #482307;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #f3f4f6;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.result h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.result p {
+  font-size: 1.2rem;
+}
+
+.button1 {
+  background: linear-gradient(to bottom, rgb(160, 245, 174), #37ee65);
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  display: none;
+}
+
+.button2 {
+  background: linear-gradient(to bottom, rgb(252, 162, 162), #ee3737);
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left, .right {
+    width: 100%;
+    text-align: center;
+  }
+}
