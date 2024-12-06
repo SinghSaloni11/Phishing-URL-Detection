@@ -16,7 +16,6 @@ class FeatureExtraction:
         self.response = None
         self.soup = None
 
-        # Trusted domains list for whitelisting (add your trusted domains here)
         self.trusted_domains = ["student.geu.ac.in", "geu.ac.in"]
 
         try:
