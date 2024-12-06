@@ -16,6 +16,9 @@ class FeatureExtraction:
         self.response = None
         self.soup = None
 
+        # Trusted domains list for whitelisting (add your trusted domains here)
+        self.trusted_domains = ["student.geu.ac.in", "geu.ac.in"]
+
         try:
             self.response = requests.get(url)
             self.soup = BeautifulSoup(self.response.text, 'html.parser')
@@ -33,21 +36,25 @@ class FeatureExtraction:
         except:
             pass
 
-        # Extract features
-        self.features.append(self.UsingIp())
-        self.features.append(self.longUrl())
-        self.features.append(self.shortUrl())
-        self.features.append(self.symbol())
-        self.features.append(self.redirecting())
-        self.features.append(self.prefixSuffix())
-        self.features.append(self.SubDomains())
-        self.features.append(self.Hppts())
-        self.features.append(self.DomainRegLen())
-        self.features.append(self.Favicon())
-        self.features.append(self.NonStdPort())
-        self.features.append(self.HTTPSDomainURL())
-        # Add placeholders for remaining features (to ensure 30 total features)
-        self.features.extend([0] * (30 - len(self.features)))
+        # If the domain is whitelisted, skip feature extraction and mark it as safe
+        if self.domain in self.trusted_domains:
+            self.features = [1] * 30  # All features set to legitimate (Safe)
+        else:
+            # Extract features for non-whitelisted domains
+            self.features.append(self.UsingIp())
+            self.features.append(self.longUrl())
+            self.features.append(self.shortUrl())
+            self.features.append(self.symbol())
+            self.features.append(self.redirecting())
+            self.features.append(self.prefixSuffix())
+            self.features.append(self.SubDomains())
+            self.features.append(self.Hppts())
+            self.features.append(self.DomainRegLen())
+            self.features.append(self.Favicon())
+            self.features.append(self.NonStdPort())
+            self.features.append(self.HTTPSDomainURL())
+            # Add placeholders for remaining features (to ensure 30 total features)
+            self.features.extend([0] * (30 - len(self.features)))
 
     def UsingIp(self):
         try:

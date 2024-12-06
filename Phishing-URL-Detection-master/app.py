@@ -22,13 +22,13 @@ def index():
         confidence_safe = gbc.predict_proba(features)[0, 1]  # Probability of being safe
         confidence_phishing = gbc.predict_proba(features)[0, 0]  # Probability of being phishing
 
-        # Interpretation
-        if prediction == 1:
-            result = "Safe"
-            confidence = f"{confidence_safe * 100:.2f}% confident this URL is safe."
-        else:
+        # Apply a threshold (e.g., 60%) for confidence to determine the result
+        if confidence_phishing > 0.6:
             result = "Phishing"
             confidence = f"{confidence_phishing * 100:.2f}% confident this URL is phishing."
+        else:
+            result = "Safe"
+            confidence = f"{confidence_safe * 100:.2f}% confident this URL is safe."
 
         return render_template(
             "index.html",
@@ -37,6 +37,19 @@ def index():
             confidence=confidence
         )
     return render_template("index.html", result=None, confidence=None)
+
+def main():
+    url = input("Enter the URL to check: ")
+    extractor = FeatureExtraction(url)
+    features = extractor.getFeaturesList()
+
+    # Check for phishing based on features
+    is_safe = all(f >= 0 for f in features)
+    print("\nFeature List:", features)
+    if is_safe:
+        print(f"The website '{url}' is SAFE.")
+    else:
+        print(f"The website '{url}' is PHISHING.")
 
 
 if __name__ == "__main__":
